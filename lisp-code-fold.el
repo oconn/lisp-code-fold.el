@@ -70,7 +70,7 @@ If those checks fail it will fallback to the default tab behavior."
                   (,original-tab-function))))))
        new-tab-function)))
 
-(defun configure-hide-show-preferences ()
+(defun lisp-code-fold-init ()
   "Configures hide-show-preferences."
   ;; Automatically open a block if you search for something where it matches
   (setq hs-isearch-open t)
