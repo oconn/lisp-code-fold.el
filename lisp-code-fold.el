@@ -42,6 +42,14 @@
        (hs-hide-block)
        (forward-line))
 
+     (while (ignore-errors (re-search-forward "^(t/def"))
+       (hs-hide-block)
+       (forward-line))
+
+     (while (ignore-errors (re-search-forward "^(pc/def"))
+       (hs-hide-block)
+       (forward-line))
+
      (while (ignore-errors (re-search-forward "\\^:fold"))
        (hs-hide-block)
        (forward-line)))))
@@ -64,7 +72,8 @@ If those checks fail it will fallback to the default tab behavior."
                                                            (buffer-substring-no-properties (point) (point-at-eol)))))
                                      (or (string-prefix-p "(ns" proceeding-text)
                                          (string-prefix-p "(def" proceeding-text)
-                                         (string-prefix-p "(t/deftest" proceeding-text))))))
+                                         (string-prefix-p "(t/def" proceeding-text)
+                                         (string-prefix-p "(pc/def" proceeding-text))))))
                 (if should-fold
                     (progn
                       (hs-toggle-hiding)
