@@ -25,6 +25,7 @@
 ;;; Code:
 
 (require 'hideshow)
+(require 'subr-x)
 
 (defun configure-auto-hide-preferences ()
   "Configures forms that should auto hide on load of buffer."
@@ -37,8 +38,9 @@
      (when (ignore-errors (re-search-forward "^(ns "))
        (hs-hide-block))
 
-     (when (ignore-errors (re-search-forward "^(def"))
-       (hs-hide-block))
+     (while (ignore-errors (re-search-forward "^(def"))
+       (hs-hide-block)
+       (forward-line))
 
      (while (ignore-errors (re-search-forward "\\^:fold"))
        (hs-hide-block)
