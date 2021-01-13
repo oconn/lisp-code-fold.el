@@ -35,24 +35,8 @@
    (save-excursion
      (goto-char (point-min))
 
-     (when (ignore-errors (re-search-forward "^(ns "))
-       (hs-hide-block))
-
-     (while (ignore-errors (re-search-forward "^(def"))
-       (hs-hide-block)
-       (forward-line))
-
-     (while (ignore-errors (re-search-forward "^(t/def"))
-       (hs-hide-block)
-       (forward-line))
-
-     (while (ignore-errors (re-search-forward "^(pc/def"))
-       (hs-hide-block)
-       (forward-line))
-
-     (while (ignore-errors (re-search-forward "\\^:fold"))
-       (hs-hide-block)
-       (forward-line)))))
+     (while (ignore-errors (re-search-forward "^("))
+       (hs-hide-block)))))
 
 (defmacro make-clojure-tab-function ()
   "Return a clojure mode-specific function suitable for binding to TAB.
@@ -70,10 +54,7 @@ If those checks fail it will fallback to the default tab behavior."
               (let ((should-fold (when (bolp)
                                    (let ((proceeding-text (string-trim-right
                                                            (buffer-substring-no-properties (point) (point-at-eol)))))
-                                     (or (string-prefix-p "(ns" proceeding-text)
-                                         (string-prefix-p "(def" proceeding-text)
-                                         (string-prefix-p "(t/def" proceeding-text)
-                                         (string-prefix-p "(pc/def" proceeding-text))))))
+                                     (string-prefix-p "(" proceeding-text)))))
                 (if should-fold
                     (progn
                       (hs-toggle-hiding)
