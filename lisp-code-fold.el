@@ -58,7 +58,8 @@ If those checks fail it will fallback to the default tab behavior."
                 (if should-fold
                     (progn
                       (hs-toggle-hiding)
-                      (beginning-of-line))
+                      (beginning-of-line)
+                      (,original-tab-function))
                   (,original-tab-function))))))
        new-tab-function)))
 
