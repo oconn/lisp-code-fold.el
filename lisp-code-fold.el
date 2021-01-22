@@ -51,10 +51,10 @@ If those checks fail it will fallback to the default tab behavior."
     `(let ((new-tab-function
             (lambda ()
               (interactive)
-              (let ((should-fold (when (bolp)
-                                   (let ((proceeding-text (string-trim-right
-                                                           (buffer-substring-no-properties (point) (point-at-eol)))))
-                                     (string-prefix-p "(" proceeding-text)))))
+              ;; Add this back in if code folding everywhere is annoying (when (bolp))
+              (let ((should-fold (let ((proceeding-text (string-trim-right
+                                                         (buffer-substring-no-properties (point) (point-at-eol)))))
+                                   (string-prefix-p "(" proceeding-text))))
                 (if should-fold
                     (progn
                       (hs-toggle-hiding)
